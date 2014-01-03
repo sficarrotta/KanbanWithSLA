@@ -326,7 +326,7 @@
                     },
                     columnRenderer  : KanbanColumnRenderer,
                     columns         : columns,
-                    fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate"
+                    fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate,PartnerRank"
                 };
     
     
@@ -831,6 +831,8 @@
             var link = new rally.sdk.ui.basic.Link({item: item});
             dojo.empty(idDiv);
             link.display(idDiv);
+            console.log("item: ", item);
+            console.log("PartnerRank: ", item.PartnerRank);
     
             var ownerImg = dojo.query('.cardOwner', card)[0];
             var ownerName = dojo.query('.cardOwnerName', card)[0];
@@ -847,6 +849,9 @@
     
             var cardName = dojo.query('.cardName', card)[0];
             cardName.innerHTML = item.Name;
+            
+            var partnerRank = dojo.query('.partnerRank', card)[0];
+            partnerRank.innerHTML = "Partner Rank: " + item.PartnerRank;
     
             var tasksDiv = dojo.query('.tasks', card);
     
@@ -966,6 +971,10 @@
             var cardName = document.createElement("div");
             dojo.addClass(cardName, "cardName");
             cardContent.appendChild(cardName);
+            
+            var partnerRank = document.createElement("div");
+            dojo.addClass(partnerRank, "partnerRank");
+            cardContent.appendChild(partnerRank);
     
             var statusDiv = document.createElement("div");
             dojo.addClass(statusDiv, 'status');

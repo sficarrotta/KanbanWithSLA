@@ -455,6 +455,8 @@ KanbanCardRenderer = function(column, item, options) {
         var link = new rally.sdk.ui.basic.Link({item: item});
         dojo.empty(idDiv);
         link.display(idDiv);
+        console.log("item: ", item);
+        console.log("PartnerRank: ", item.PartnerRank);
 
         var ownerImg = dojo.query('.cardOwner', card)[0];
         var ownerName = dojo.query('.cardOwnerName', card)[0];
@@ -471,6 +473,9 @@ KanbanCardRenderer = function(column, item, options) {
 
         var cardName = dojo.query('.cardName', card)[0];
         cardName.innerHTML = item.Name;
+        
+        var partnerRank = dojo.query('.partnerRank', card)[0];
+        partnerRank.innerHTML = "Partner Rank: " + item.PartnerRank;
 
         var tasksDiv = dojo.query('.tasks', card);
 
@@ -590,6 +595,10 @@ KanbanCardRenderer = function(column, item, options) {
         var cardName = document.createElement("div");
         dojo.addClass(cardName, "cardName");
         cardContent.appendChild(cardName);
+        
+        var partnerRank = document.createElement("div");
+        dojo.addClass(partnerRank, "partnerRank");
+        cardContent.appendChild(partnerRank);
 
         var statusDiv = document.createElement("div");
         dojo.addClass(statusDiv, 'status');
