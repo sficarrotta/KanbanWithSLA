@@ -246,8 +246,8 @@ KanbanBoard = function(rallyDataSource, configShow) {
                 colorByArtifactType = kanbanInfo.colorByArtifactType;
                 showSla = kanbanInfo.showSla;
                 showSlaFor = kanbanInfo.showSlaFor;
-                slaStart = kanbanInfo.slaStart
-                slaEnd = kanbanInfo.slaEnd
+                slaStart = kanbanInfo.slaStart;
+                slaEnd = kanbanInfo.slaEnd;
 
                 if (kanbanInfo.showAge) {
                     showAgeAfter = kanbanInfo.showAgeAfter;
@@ -301,6 +301,7 @@ KanbanBoard = function(rallyDataSource, configShow) {
                 types           : [],
                 attribute       : kanbanField,
                 sortAscending   : true,
+                //query           : 'JiraID = "null"',
                 order           : "Rank",
                 cardRenderer    : KanbanCardRenderer,
                 cardOptions     : {
@@ -315,7 +316,7 @@ KanbanBoard = function(rallyDataSource, configShow) {
                 },
                 columnRenderer  : KanbanColumnRenderer,
                 columns         : columns,
-                fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate"
+                fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate,JiraID"
             };
 
 
@@ -328,7 +329,11 @@ KanbanBoard = function(rallyDataSource, configShow) {
             }
 
             if (hideLastColumnIfReleased) {
-                cardboardConfig.query = new rally.sdk.util.Query("Release = null").or(kanbanField + " != " + '"' + lastState + '"');
+                console.log( "query: ", cardboardConfig.query);
+                cardboardConfig.query = new rally.sdk.util.Query("Release = null").or(kanbanField + " != " + '"' + lastState + '"').and("JiraID = null");
+                //cardboardConfig.query = query1.and("JiraID = null");
+                console.log( "final query: ", cardboardConfig.query);
+                //cardboardConfig.query = new rally.sdk.util.Query("Release = null").or(kanbanField + " != " + '"' + lastState + '"');
             }
 
             if (filterByTagsDropdown && filterByTagsDropdown.getDisplayedValue()) {
