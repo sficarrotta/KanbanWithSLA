@@ -302,7 +302,7 @@ KanbanBoard = function(rallyDataSource, configShow) {
                 attribute       : kanbanField,
                 sortAscending   : true,
                 query           : 'JiraID != ""',
-                order           : "Rank",
+                order           : "Priority",
                 cardRenderer    : KanbanCardRenderer,
                 cardOptions     : {
                     showTaskCompletion: showTaskCompletion,
@@ -316,7 +316,7 @@ KanbanBoard = function(rallyDataSource, configShow) {
                 },
                 columnRenderer  : KanbanColumnRenderer,
                 columns         : columns,
-                fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate,PartnerRank"
+                fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate,PartnerRank,Priority"
             };
 
 

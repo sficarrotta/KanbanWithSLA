@@ -476,6 +476,9 @@ KanbanCardRenderer = function(column, item, options) {
         
         var partnerRank = dojo.query('.partnerRank', card)[0];
         partnerRank.innerHTML = "Partner Rank: " + item.PartnerRank;
+        
+        var priority = dojo.query('.priority', card)[0];
+        priority.innerHTML = "Priority: " + item.Priority;
 
         var tasksDiv = dojo.query('.tasks', card);
 
@@ -599,6 +602,10 @@ KanbanCardRenderer = function(column, item, options) {
         var partnerRank = document.createElement("div");
         dojo.addClass(partnerRank, "partnerRank");
         cardContent.appendChild(partnerRank);
+        
+        var priority = document.createElement("div");
+        dojo.addClass(priority, "priority");
+        cardContent.appendChild(priority);
 
         var statusDiv = document.createElement("div");
         dojo.addClass(statusDiv, 'status');

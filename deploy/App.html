@@ -312,7 +312,7 @@
                     attribute       : kanbanField,
                     sortAscending   : true,
                     query           : 'JiraID != ""',
-                    order           : "Rank",
+                    order           : "Priority",
                     cardRenderer    : KanbanCardRenderer,
                     cardOptions     : {
                         showTaskCompletion: showTaskCompletion,
@@ -326,7 +326,7 @@
                     },
                     columnRenderer  : KanbanColumnRenderer,
                     columns         : columns,
-                    fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate,PartnerRank"
+                    fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,ScheduleState,AcceptedDate,PartnerRank,Priority"
                 };
     
     
@@ -852,6 +852,9 @@
             
             var partnerRank = dojo.query('.partnerRank', card)[0];
             partnerRank.innerHTML = "Partner Rank: " + item.PartnerRank;
+            
+            var priority = dojo.query('.priority', card)[0];
+            priority.innerHTML = "Priority: " + item.Priority;
     
             var tasksDiv = dojo.query('.tasks', card);
     
@@ -975,6 +978,10 @@
             var partnerRank = document.createElement("div");
             dojo.addClass(partnerRank, "partnerRank");
             cardContent.appendChild(partnerRank);
+            
+            var priority = document.createElement("div");
+            dojo.addClass(priority, "priority");
+            cardContent.appendChild(priority);
     
             var statusDiv = document.createElement("div");
             dojo.addClass(statusDiv, 'status');
