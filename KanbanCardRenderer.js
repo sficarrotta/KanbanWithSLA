@@ -151,8 +151,7 @@ KanbanCardRenderer = function(column, item, options) {
         }
 
         var lastStateDate = getLastStateChange();
-
-        var lastUpdateDate = rally.sdk.util.DateTime.fromIsoString(lastStateDate);        
+        var lastUpdateDate = rally.sdk.util.DateTime.fromIsoString(lastStateDate);  
         return rally.sdk.util.DateTime.getDifference(new Date(), lastUpdateDate, "day");
     };
     
@@ -455,8 +454,7 @@ KanbanCardRenderer = function(column, item, options) {
         var link = new rally.sdk.ui.basic.Link({item: item});
         dojo.empty(idDiv);
         link.display(idDiv);
-        console.log("item: ", item);
-        console.log("PartnerRank: ", item.PartnerRank);
+        // console.log("item: ", item);
 
         var ownerImg = dojo.query('.cardOwner', card)[0];
         var ownerName = dojo.query('.cardOwnerName', card)[0];
@@ -479,7 +477,13 @@ KanbanCardRenderer = function(column, item, options) {
         
         var priority = dojo.query('.priority', card)[0];
         priority.innerHTML = "Priority: " + item.Priority;
-
+        
+        // get total age of work item
+        var creationDate = dojo.query('.creationDate', card)[0];        
+        var transformedDate = rally.sdk.util.DateTime.fromIsoString(item.CreationDate);    
+        var age = rally.sdk.util.DateTime.getDifference(new Date(), transformedDate, "day");
+        creationDate.innerHTML = "Total Age: " + age + " days";
+        
         var tasksDiv = dojo.query('.tasks', card);
 
         if (tasksDiv.length > 0) {
@@ -606,6 +610,10 @@ KanbanCardRenderer = function(column, item, options) {
         var priority = document.createElement("div");
         dojo.addClass(priority, "priority");
         cardContent.appendChild(priority);
+                
+        var creationDate = document.createElement("div");
+        dojo.addClass(creationDate, "creationDate");
+        cardContent.appendChild(creationDate);
 
         var statusDiv = document.createElement("div");
         dojo.addClass(statusDiv, 'status');
